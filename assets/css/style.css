@@ -20,6 +20,16 @@ h2 {
   color: white;
 }
 
+/* Greeting style */
+#greeting{
+  color: yellow;
+  font-size: 26px;
+  margin: 10px 0;
+  letter-spacing: 2px;
+  text-align: center;
+  font-weight: bold;
+}
+
 /* Date style */
 #date {
   color: white;

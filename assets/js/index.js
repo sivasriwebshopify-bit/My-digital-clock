@@ -3,44 +3,69 @@ const minuteEl = document.getElementById("minutes");
 const secondEl = document.getElementById("seconds");
 const ampmEl = document.getElementById("ampm");
 const dateEl = document.getElementById("date");
+const greetingEl = document.getElementById("greeting");
 
 function updateClock() {
 
-  const now = new Date();
+const now = new Date();
 
-  let h = now.getHours();
-  let m = now.getMinutes();
-  let s = now.getSeconds();
-  let ampm = "AM";
+let h = now.getHours();
+let m = now.getMinutes();
+let s = now.getSeconds();
 
-  if (h >= 12) {
-    ampm = "PM";
-  }
+let ampm = "AM";
+let greeting = "";
 
-  if (h > 12) {
-    h = h - 12;
-  }
+/* Greeting Message */
 
-  h = h < 10 ? "0" + h : h;
-  m = m < 10 ? "0" + m : m;
-  s = s < 10 ? "0" + s : s;
+if (h < 12) {
+greeting = "Good Morning ☀️";
+}
+else if (h < 18) {
+greeting = "Good Afternoon 🌤️";
+}
+else {
+greeting = "Good Evening 🌙";
+}
 
-  hourEl.innerText = h;
-  minuteEl.innerText = m;
-  secondEl.innerText = s;
-  ampmEl.innerText = ampm;
+greetingEl.innerText = greeting;
 
-  // Date display
-  const options = {
-    weekday: "long",
-    year: "numeric",
-    month: "long",
-    day: "numeric"
-  };
+/* AM PM */
 
-  dateEl.innerText = now.toLocaleDateString(undefined, options);
+if (h >= 12) {
+ampm = "PM";
+}
 
-  setTimeout(updateClock, 1000);
+if (h > 12) {
+h = h - 12;
+}
+
+/* Add Zero */
+
+h = h < 10 ? "0" + h : h;
+m = m < 10 ? "0" + m : m;
+s = s < 10 ? "0" + s : s;
+
+/* Time */
+
+hourEl.innerText = h;
+minuteEl.innerText = m;
+secondEl.innerText = s;
+ampmEl.innerText = ampm;
+
+/* Date */
+
+const options = {
+weekday: "long",
+year: "numeric",
+month: "long",
+day: "numeric"
+};
+
+dateEl.innerText = now.toLocaleDateString(undefined, options);
+
+setTimeout(updateClock, 1000);
+
 }
 
 updateClock();
