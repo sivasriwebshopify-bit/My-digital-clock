@@ -3,14 +3,18 @@ const minuteEl = document.getElementById("minutes");
 const secondEl = document.getElementById("seconds");
 const ampmEl = document.getElementById("ampm");
 const dateEl = document.getElementById("date");
+const timezoneEl = document.getElementById("timezone");
 
 function updateClock() {
 
-  const now = new Date();
+  const timezone = timezoneEl.value;
 
-  let h = now.getHours();
-  let m = now.getMinutes();
-  let s = now.getSeconds();
+  const now = new Date().toLocaleString("en-US", { timeZone: timezone });
+  const dateObj = new Date(now);
+
+  let h = dateObj.getHours();
+  let m = dateObj.getMinutes();
+  let s = dateObj.getSeconds();
   let ampm = "AM";
 
   if (h >= 12) {
@@ -30,7 +34,6 @@ function updateClock() {
   secondEl.innerText = s;
   ampmEl.innerText = ampm;
 
-  // Date display
   const options = {
     weekday: "long",
     year: "numeric",
@@ -38,7 +41,7 @@ function updateClock() {
     day: "numeric"
   };
 
-  dateEl.innerText = now.toLocaleDateString(undefined, options);
+  dateEl.innerText = dateObj.toLocaleDateString(undefined, options);
 
   setTimeout(updateClock, 1000);
 }
